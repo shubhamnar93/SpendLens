@@ -1,0 +1,62 @@
+# AI Tools Benchmark & Pricing Comparison
+- cursor 
+  - Hobby - Free
+  - Pro - $20/user/mo
+  - Pro+ - $60/user/mo
+  - Ultra - $200/user/mo
+  - Teams - $40/user/mo
+- GitHub Copilot
+  - Free - Free
+  - Pro - $10/user/mo
+  - Pro+ - $39/user/mo
+  - Business - $19/user/mo
+  - Enterprise - $39/user/mo
+- Claude
+  - Free -Free
+  - Pro billed annually - $17/user/mo
+  - Pro billed monthly - $20/user/mo
+  - Max - $100/user/mo
+  - Team standard seat monthly - $25/user/mo
+  - Team standard seat annually - $20/user/mo
+  - Team premium seat monthly - $125/user/mo
+  - Team premium seat annually - $100/user/mo
+  - Enterprise - 20/user/mo
+  - API direct
+    - Opus 4.7
+      - Input : 5$/Mtok
+      - output: 25$/Mtok
+    - Sonnet 4.6
+      - Input : 3$/Mtok
+      - output: 15$/Mtok
+    - Haiku 4.5
+      - Input : 1$/Mtok
+      - output: 5$/Mtok
+- ChatGPT
+  - go: 4.24$/user/mo
+  - Plus: 21.22$/user/mo
+  - Pro: 113.58$/user/mo
+  - Business: 19.11/user/mo
+- OpenAI API direct
+    - GPT-5.5
+      - Input : 5$/Mtok
+      - output: 30$/Mtok
+    - GPT-5.4
+      - Input : 2.5$/Mtok
+      - output: 15$/Mtok
+    - GPT-5.4 mini
+      - Input : 0.75$/Mtok
+      - output: 4.50$/Mtok
+- Gemini
+  - Free: Free
+  - Plus: 4.24$/user/mo
+  - Pro: 20.7$/user/mo
+- Windsurf
+  - Free: Free 
+  - Pro: 20$/user/mo
+  - Max: 200$/user/mo
+  - Teams: 40$/user/mo
+- v0
+  - Free: free
+  - Teams: 30$/user/mo
+  - Business: 30$/user/mo
+
