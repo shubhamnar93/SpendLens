@@ -445,3 +445,107 @@ Pipeline steps:
 5. Build Next.js app
 
 Failure blocks deployment.
+
+---
+
+# Folder structure
+
+├── src/
+│
+│   ├── app/                       
+│   │   ├── (marketing)/
+│   │   │   └── page.tsx         
+│   │   │
+│   │   ├── audit/
+│   │   │   ├── page.tsx         
+│   │   │   └── result/
+│   │   │       └── [auditId]/
+│   │   │           └── page.tsx  
+│   │   │
+│   │   ├── report/
+│   │   │   └── [shareId]/
+│   │   │       └── page.tsx     
+│   │   │
+│   │   ├── api/
+│   │   │   └── trpc/[trpc]/route.ts
+│   │   │
+│   │   ├── layout.tsx
+│   │   └── globals.css
+│
+│   ├── components/               
+│   │   ├── landing/
+│   │   ├── audit/
+│   │   ├── results/
+│   │   ├── report/
+│   │   └── ui/                  
+│
+│   ├── server/                 
+│   │
+│   │   ├── db/
+│   │   │   ├── client.ts        
+│   │   │   └── queries/         
+│   │   │       ├── audit.ts
+│   │   │       └── user.ts
+│   │   │
+│   │   ├── audit-engine/        
+│   │   │   ├── engine.ts        
+│   │   │   ├── types.ts
+│   │   │   ├── rules/
+│   │   │   │   ├── planOptimizer.ts
+│   │   │   │   ├── alternativeTools.ts
+│   │   │   │   └── overspendDetector.ts
+│   │   │   │
+│   │   │   └── knowledge/
+│   │   │       └── dataset.ts    
+│   │   │
+│   │   ├── email/
+│   │   │   ├── sendReportEmail.ts
+│   │   │   └── sendConsultEmail.ts
+│   │   │
+│   │   ├── captcha/
+│   │   │   └── verifyHCaptcha.ts
+│   │   │
+│   │   └── utils/
+│   │       └── generateShareId.ts
+│
+│   ├── trpc/
+│   │   ├── init.ts
+│   │   ├── routers/
+│   │   │   ├── _app.ts
+│   │   │   ├── audit.ts          
+│   │   │   ├── lead.ts          
+│   │   │   └── report.ts        
+│   │   │
+│   │   ├── client.tsx
+│   │   ├── query-client.ts
+│   │   └── server.tsx
+│
+│   ├── lib/                     
+│   │   ├── env.ts
+│   │   ├── constants.ts
+│   │   └── formatCurrency.ts
+│
+│   ├── types/
+│   │   ├── audit.ts
+│   │   └── tool.ts
+│
+│   └── styles/
+│       └── tailwind.css
+│
+├── tests/
+│   ├── audit-engine/
+│   │   ├── overspend.test.ts
+│   │   ├── planOptimizer.test.ts
+│   │   ├── alternatives.test.ts
+│   │   ├── savingsCalc.test.ts
+│   │   └── fullAudit.test.ts
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+├── package.json
+├── tsconfig.json
+└── next.config.js
+
+---
