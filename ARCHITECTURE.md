@@ -489,11 +489,11 @@ Failure blocks deployment.
 │   │   │
 │   │   ├── audit-engine/        
 │   │   │   ├── engine.ts        
+│   │   │   ├── index.ts        
 │   │   │   ├── types.ts
 │   │   │   ├── rules/
-│   │   │   │   ├── planOptimizer.ts
-│   │   │   │   ├── alternativeTools.ts
-│   │   │   │   └── overspendDetector.ts
+│   │   │   │   ├── overspendDetector.ts
+│   │   │   │   └── teamSizeOptimisePlan.ts
 │   │   │   │
 │   │   │   └── knowledge/
 │   │   │       └── dataset.ts    
@@ -530,15 +530,13 @@ Failure blocks deployment.
 │   │   └── tool.ts
 │
 │   └── styles/
-│       └── tailwind.css
-│
-├── tests/
-│   ├── audit-engine/
-│   │   ├── overspend.test.ts
-│   │   ├── planOptimizer.test.ts
-│   │   ├── alternatives.test.ts
-│   │   ├── savingsCalc.test.ts
-│   │   └── fullAudit.test.ts
+│   │    └── tailwind.css
+│   │
+|   └── tests/
+│       └── audit-engine/
+│            ├── overspendDetector.test.ts
+│            ├── teamSizeOptimisePlan.test.ts
+│            └── runAudit.test.ts
 │
 ├── .github/
 │   └── workflows/

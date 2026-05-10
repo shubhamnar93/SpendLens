@@ -1,0 +1,322 @@
+(globalThis["TURBOPACK"] || (globalThis["TURBOPACK"] = [])).push([typeof document === "object" ? document.currentScript : undefined,
+"[project]/src/components/Headers.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Headers",
+    ()=>Headers
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
+"use client";
+;
+;
+const Headers = /*#__PURE__*/ _s(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].memo(_c = _s(()=>{
+    _s();
+    const [showHeader, setShowHeader] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
+    const [lastScrollY, setLastScrollY] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "Headers.useEffect": ()=>{
+            const controlHeader = {
+                "Headers.useEffect.controlHeader": ()=>{
+                    const currentScrollY = window.scrollY;
+                    if (currentScrollY > lastScrollY && currentScrollY > 80) {
+                        // scrolling DOWN -> hide
+                        setShowHeader(false);
+                    } else {
+                        // scrolling UP -> show
+                        setShowHeader(true);
+                    }
+                    setLastScrollY(currentScrollY);
+                }
+            }["Headers.useEffect.controlHeader"];
+            window.addEventListener("scroll", controlHeader);
+            return ({
+                "Headers.useEffect": ()=>window.removeEventListener("scroll", controlHeader)
+            })["Headers.useEffect"];
+        }
+    }["Headers.useEffect"], [
+        lastScrollY
+    ]);
+    const scrollToSection = (id)=>{
+        const element = document.getElementById(id);
+        if (!element) return;
+        const yOffset = -80;
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({
+            top: y,
+            behavior: "smooth"
+        });
+    };
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
+        className: `fixed top-4 left-0 z-50 w-full flex justify-center transition-transform duration-500 
+  ${showHeader ? "translate-y-0" : "-translate-y-[120%]"}`,
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "bg-white/80 rounded-full backdrop-blur-md shadow-sm py-2 px-8 w-[90%] border border-[#D9D9D9] flex items-center justify-between",
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                    className: "flex items-center",
+                    href: "/",
+                    "data-discover": "true",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                            className: "w-8 h-8 mr-3",
+                            fill: "#086841",
+                            viewBox: "0 0 32 32",
+                            version: "1.1",
+                            xmlns: "http://www.w3.org/2000/svg",
+                            stroke: "#086841",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("g", {
+                                    id: "SVGRepo_bgCarrier",
+                                    strokeWidth: "0"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/Headers.tsx",
+                                    lineNumber: 45,
+                                    columnNumber: 11
+                                }, ("TURBOPACK compile-time value", void 0)),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("g", {
+                                    id: "SVGRepo_tracerCarrier",
+                                    strokeLinecap: "round",
+                                    strokeLinejoin: "round"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/Headers.tsx",
+                                    lineNumber: 46,
+                                    columnNumber: 11
+                                }, ("TURBOPACK compile-time value", void 0)),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("g", {
+                                    id: "SVGRepo_iconCarrier",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("title", {
+                                            children: "lens"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/Headers.tsx",
+                                            lineNumber: 48,
+                                            columnNumber: 13
+                                        }, ("TURBOPACK compile-time value", void 0)),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                            d: "M0 13.024q0-2.624 1.024-5.056t2.784-4.16 4.16-2.752 5.056-1.056q2.656 0 5.056 1.056t4.16 2.752 2.784 4.16 1.024 5.056q0 3.616-1.984 6.816l7.072 7.040q0.864 0.896 0.864 2.144t-0.864 2.112-2.144 0.864-2.112-0.864l-7.040-7.040q-3.2 1.952-6.816 1.952-2.656 0-5.056-1.024t-4.16-2.784-2.784-4.128-1.024-5.088zM4 13.024q0 2.464 1.216 4.544t3.296 3.264 4.512 1.216q1.824 0 3.488-0.704t2.88-1.92 1.92-2.88 0.736-3.52-0.736-3.52-1.92-2.848-2.88-1.92-3.488-0.736q-2.432 0-4.512 1.216t-3.296 3.296-1.216 4.512z"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/Headers.tsx",
+                                            lineNumber: 49,
+                                            columnNumber: 13
+                                        }, ("TURBOPACK compile-time value", void 0))
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/components/Headers.tsx",
+                                    lineNumber: 47,
+                                    columnNumber: 11
+                                }, ("TURBOPACK compile-time value", void 0))
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/components/Headers.tsx",
+                            lineNumber: 44,
+                            columnNumber: 9
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "text-[#086841] text-[43px] font-semibold font-pp-mori-semibold mt-0",
+                            children: "SpendLens"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/Headers.tsx",
+                            lineNumber: 52,
+                            columnNumber: 9
+                        }, ("TURBOPACK compile-time value", void 0))
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/Headers.tsx",
+                    lineNumber: 43,
+                    columnNumber: 7
+                }, ("TURBOPACK compile-time value", void 0)),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            className: "mr-8 cursor-pointer",
+                            children: "Run Free AI Spend Audit"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/Headers.tsx",
+                            lineNumber: 55,
+                            columnNumber: 9
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            className: "mr-8 cursor-pointer",
+                            onClick: ()=>scrollToSection("testimonials"),
+                            children: "Testimonials"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/Headers.tsx",
+                            lineNumber: 56,
+                            columnNumber: 9
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            className: "mr-8 cursor-pointer",
+                            onClick: ()=>scrollToSection("HowItWorks"),
+                            children: "How It Work"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/Headers.tsx",
+                            lineNumber: 57,
+                            columnNumber: 9
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            className: "mr-4 cursor-pointer",
+                            onClick: ()=>scrollToSection("FAQ"),
+                            children: "FAQ"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/Headers.tsx",
+                            lineNumber: 58,
+                            columnNumber: 9
+                        }, ("TURBOPACK compile-time value", void 0))
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/Headers.tsx",
+                    lineNumber: 54,
+                    columnNumber: 7
+                }, ("TURBOPACK compile-time value", void 0))
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/Headers.tsx",
+            lineNumber: 42,
+            columnNumber: 5
+        }, ("TURBOPACK compile-time value", void 0))
+    }, void 0, false, {
+        fileName: "[project]/src/components/Headers.tsx",
+        lineNumber: 39,
+        columnNumber: 10
+    }, ("TURBOPACK compile-time value", void 0));
+}, "Lh1F4cJh6fZ2JHTSDasMFq7/MVY=")), "Lh1F4cJh6fZ2JHTSDasMFq7/MVY=");
+_c1 = Headers;
+var _c, _c1;
+__turbopack_context__.k.register(_c, "Headers$React.memo");
+__turbopack_context__.k.register(_c1, "Headers");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/src/components/landing/FAQItem.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "FAQItem",
+    ()=>FAQItem
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
+"use client";
+;
+const FAQItem = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["memo"])(_c = _s(({ question, answer, key })=>{
+    _s();
+    const [open, setOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        onClick: ()=>setOpen(!open),
+        className: `py-[22px] px-[24px] rounded-xl w-[95%] md:w-[70%] mx-auto cursor-pointer transition-all duration-300 
+      ${open ? "bg-[#1C1C1C14]" : "bg-[#12121205]"}`,
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex justify-between items-center",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "font-pp-mori-semibold font-semibold text-[14px] md:text-[16px]",
+                        children: question
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/landing/FAQItem.tsx",
+                        lineNumber: 16,
+                        columnNumber: 9
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    open ? /* UP ARROW (open) */ /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                        viewBox: "0 0 32 32",
+                        className: "w-8 h-8 shrink-0",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("rect", {
+                                width: "32",
+                                height: "32",
+                                rx: "12",
+                                fill: "#242424"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/landing/FAQItem.tsx",
+                                lineNumber: 24,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                d: "M15.9992 13.0501L21.2992 17.9251C21.4826 18.1084 21.5742 18.3418 21.5742 18.6251C21.5742 18.9084 21.4826 19.1418 21.2992 19.3251C21.1159 19.5084 20.8826 19.6001 20.5992 19.6001C20.3159 19.6001 20.0826 19.5084 19.8992 19.3251L15.9992 15.4251L12.0992 19.3251C11.9159 19.5084 11.6826 19.6001 11.3992 19.6001C11.1159 19.6001 10.8826 19.5084 10.6992 19.3251C10.5159 19.1418 10.4242 18.9084 10.4242 18.6251C10.4242 18.3418 10.5159 18.1084 10.6992 17.9251L15.2992 13.3251Z",
+                                fill: "#A0A0A0"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/landing/FAQItem.tsx",
+                                lineNumber: 25,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/landing/FAQItem.tsx",
+                        lineNumber: 23,
+                        columnNumber: 11
+                    }, ("TURBOPACK compile-time value", void 0)) : /* DOWN ARROW (closed) */ /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                        viewBox: "0 0 32 32",
+                        className: "w-8 h-8 shrink-0",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("rect", {
+                                width: "32",
+                                height: "32",
+                                rx: "12",
+                                fill: "#242424",
+                                fillOpacity: "0.05"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/landing/FAQItem.tsx",
+                                lineNumber: 33,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                d: "M16.0008 18.9499L10.7008 14.0749C10.5174 13.8916 10.4258 13.6582 10.4258 13.3749C10.4258 13.0916 10.5174 12.8582 10.7008 12.6749C10.8841 12.4916 11.1174 12.3999 11.4008 12.3999C11.6841 12.3999 11.9174 12.4916 12.1008 12.6749L16.0008 16.5749L19.9008 12.6749C20.0841 12.4916 20.3174 12.3999 20.6008 12.3999C20.8841 12.3999 21.1174 12.4916 21.3008 12.6749C21.4841 12.8582 21.5758 13.0916 21.5758 13.3749C21.5758 13.6582 21.4841 13.8916 21.3008 14.0749L16.7008 18.6749Z",
+                                fill: "#A0A0A0"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/landing/FAQItem.tsx",
+                                lineNumber: 34,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/landing/FAQItem.tsx",
+                        lineNumber: 32,
+                        columnNumber: 11
+                    }, ("TURBOPACK compile-time value", void 0))
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/landing/FAQItem.tsx",
+                lineNumber: 15,
+                columnNumber: 7
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: `overflow-hidden transition-all duration-300 ${open ? "max-h-40 mt-2 opacity-100" : "max-h-0 opacity-0"}`,
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                    className: "text-[#00000080] text-[14px] md:text-[16px]",
+                    children: answer
+                }, void 0, false, {
+                    fileName: "[project]/src/components/landing/FAQItem.tsx",
+                    lineNumber: 47,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0))
+            }, void 0, false, {
+                fileName: "[project]/src/components/landing/FAQItem.tsx",
+                lineNumber: 43,
+                columnNumber: 7
+            }, ("TURBOPACK compile-time value", void 0))
+        ]
+    }, key, true, {
+        fileName: "[project]/src/components/landing/FAQItem.tsx",
+        lineNumber: 8,
+        columnNumber: 5
+    }, ("TURBOPACK compile-time value", void 0));
+}, "xG1TONbKtDWtdOTrXaTAsNhPg/Q=")), "xG1TONbKtDWtdOTrXaTAsNhPg/Q=");
+_c1 = FAQItem;
+var _c, _c1;
+__turbopack_context__.k.register(_c, "FAQItem$memo");
+__turbopack_context__.k.register(_c1, "FAQItem");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+]);
+
+//# sourceMappingURL=src_components_0i_8_33._.js.map
