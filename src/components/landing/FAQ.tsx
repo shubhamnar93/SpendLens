@@ -42,8 +42,6 @@ export const FAQ = React.memo(() => {
       </div>
     </div>
   </section>
-
-
 })
 
 

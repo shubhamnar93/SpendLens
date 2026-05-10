@@ -1,11 +1,12 @@
 import React from "react"
 
-type Variant = "solid" | "ghost"
+type Variant = "solid" | "ghost" | "outline"
 
 type CommonProps = {
   variant?: Variant
   label: string
   className?: string
+  size?: "xs" | "md" | "xl"
 }
 
 type ButtonProps = CommonProps &
@@ -21,15 +22,19 @@ type AnchorProps = CommonProps &
 type Props = ButtonProps | AnchorProps
 
 export const Button = React.memo((props: Props) => {
-  const { variant = "solid", label, className } = props
+  const { variant = "solid", label, className, size = "xl" } = props
+  const commonClass = `p-${size == "xs" ? 2 : size == "md" ? 3 : 5} hover:scale-105 transition-transform duration-300 text-${size} rounded-md  mt-5 md:mt-0`
 
   const baseSolid =
-    "bg-[#1A1A1A] p-5 hover:scale-105 transition-transform duration-300 text-white rounded-md text-xl mt-5 md:mt-0"
+    `bg-[#1A1A1A]  text-white ${commonClass}`
+
+  const baseOutline =
+    `bg-transparent border border-[#086841] ${commonClass}`
 
   const baseGhost =
-    "bg-transparent border border-[#086841] p-5 hover:scale-105 transition-transform duration-300 rounded-md text-xl block mt-5 md:mt-0"
+    `bg-transparent border border-[#e2e8f0] ${commonClass}`
 
-  const finalClass = `${variant === "solid" ? baseSolid : baseGhost} ${className ?? ""}`
+  const finalClass = `${variant === "solid" ? baseSolid : variant === "outline" ? baseOutline : baseGhost} ${className ?? ""}`
 
 
   if (props.as === "a") {
