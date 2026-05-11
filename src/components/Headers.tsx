@@ -1,6 +1,7 @@
 "use client"
 import React from "react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export const Headers = React.memo(() => {
 
@@ -40,7 +41,7 @@ export const Headers = React.memo(() => {
     className={`fixed top-4 left-0 z-50 w-full flex justify-center transition-transform duration-500 
   ${showHeader ? "translate-y-0" : "-translate-y-[120%]"}`}>
     <div className="bg-white/80 rounded-full backdrop-blur-md shadow-sm py-2 px-8 w-[90%] border border-[#D9D9D9] flex items-center justify-between">
-      <a className="flex items-center" href="/" data-discover="true">
+      <Link className="flex items-center" href="/">
         <svg className="w-8 h-8 mr-3" fill="#086841" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" stroke="#086841">
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
           <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -50,7 +51,7 @@ export const Headers = React.memo(() => {
           </g>
         </svg>
         <p className="text-[#086841] text-[43px] font-semibold font-pp-mori-semibold mt-0">SpendLens</p>
-      </a>
+      </Link>
       <div className="flex">
         <button className="mr-8 cursor-pointer">Run Free AI Spend Audit</button>
         <button className="mr-8 cursor-pointer" onClick={() => scrollToSection("testimonials")}>Testimonials</button>
@@ -61,3 +62,4 @@ export const Headers = React.memo(() => {
   </header>
 })
 
+Headers.displayName = "Headers";

@@ -55,6 +55,8 @@ export const ToolResultCard = React.memo(({ recommendation, isApi }: { isApi: bo
   )
 })
 
+ToolResultCard.displayName = "ToolResultCard";
+
 
 function Metric({
   label,

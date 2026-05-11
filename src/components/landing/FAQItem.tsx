@@ -1,12 +1,11 @@
 "use client"
 import { memo, useState } from "react";
 
-export const FAQItem = memo(({ question, answer, key }: { question: string, answer: string, key: string | number }) => {
+export const FAQItem = memo(({ question, answer }: { question: string, answer: string }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <div
-      key={key}
       onClick={() => setOpen(!open)}
       className={`py-[22px] px-[24px] rounded-xl w-[95%] md:w-[70%] mx-auto cursor-pointer transition-all duration-300 
       ${open ? "bg-[#1C1C1C14]" : "bg-[#12121205]"}`}
@@ -51,3 +50,5 @@ export const FAQItem = memo(({ question, answer, key }: { question: string, answ
     </div>
   );
 })
+
+FAQItem.displayName = "FAQItem";

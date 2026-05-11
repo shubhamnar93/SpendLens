@@ -36,10 +36,11 @@ export const Hero = React.memo(() => {
         </div>
         <div className="z-50 flex gap-8">
           <Button variant="outline" label="Start Buying Credit" as="a" href={"https://credex.rocks/"} />
-          <Button variant="solid" label="Run Free Audit" as="a" href="Audit" />
+          <Button variant="solid" label="Run Free Audit" as="a" href="audit" />
         </div>
       </div>
     </>
   )
 })
 
+Hero.displayName = "Hero";

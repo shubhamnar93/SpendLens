@@ -1,7 +1,7 @@
 import React from "react";
 import { TrendingDown } from "../icons/TrendingDown";
 import { Sparkles } from "../icons/Sparkles";
-import { AuditRecommendation, AuditResult } from "@/server/audit-engine";
+import { AuditResult } from "@/server/audit-engine";
 
 export const ResultsSummaryCards = React.memo(({ results }: { results: AuditResult[] }) => {
   return (
@@ -30,3 +30,5 @@ export const ResultsSummaryCards = React.memo(({ results }: { results: AuditResu
     </div>
   )
 })
+
+ResultsSummaryCards.displayName = "ResultsSummaryCards";

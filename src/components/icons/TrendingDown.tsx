@@ -7,3 +7,5 @@ export const TrendingDown = React.memo(() => {
     </svg>
   )
 })
+
+TrendingDown.displayName = "TrendingDown";

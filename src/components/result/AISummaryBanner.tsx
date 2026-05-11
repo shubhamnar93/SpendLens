@@ -11,3 +11,5 @@ export const AISummaryBanner = React.memo(({ summary }: { summary: string }) => 
     </div>
   )
 })
+
+AISummaryBanner.displayName = "AISummaryBanner";

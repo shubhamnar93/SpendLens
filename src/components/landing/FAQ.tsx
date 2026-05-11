@@ -44,4 +44,4 @@ export const FAQ = React.memo(() => {
   </section>
 })
 
-
+FAQ.displayName = "FAQ";

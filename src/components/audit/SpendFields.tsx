@@ -38,3 +38,4 @@ export const SpenFields = React.memo(({ tool, updateTool, index }: SpendFieldsPr
   }
 })
 
+SpenFields.displayName = "SpenFields";

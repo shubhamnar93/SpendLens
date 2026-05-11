@@ -1,4 +1,3 @@
-
 import React from "react"
 
 export const Sparkles = React.memo(() => {
@@ -8,3 +7,5 @@ export const Sparkles = React.memo(() => {
     </svg>
   )
 })
+
+Sparkles.displayName = "Sparkles";

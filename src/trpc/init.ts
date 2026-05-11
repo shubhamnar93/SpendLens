@@ -1,12 +1,11 @@
 import { initTRPC } from '@trpc/server';
 
 /**
- * This context creator accepts `headers` so it can be reused in both
- * the RSC server caller (where you pass `next/headers`) and the
- * API route handler (where you pass the request headers).
+ * This context creator is used to define the context for tRPC procedures.
+ * It accepts headers which can be used for authentication or other purposes.
  */
-export const createTRPCContext = async (opts: { headers: Headers }) => {
-  // const user = await auth(opts.headers);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const createTRPCContext = async (_opts: { headers: Headers }) => {
   return { userId: 'user_123' };
 };
 

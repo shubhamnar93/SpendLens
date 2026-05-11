@@ -38,7 +38,8 @@ export const Button = React.memo((props: Props) => {
 
 
   if (props.as === "a") {
-    const { as, variant, label, className, ...anchorProps } = props
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { variant: _v, label: _l, className: _c, ...anchorProps } = props
     return (
       <a className={finalClass} tabIndex={0} {...anchorProps}>
         {label}
@@ -46,10 +47,13 @@ export const Button = React.memo((props: Props) => {
     )
   }
 
-  const { as, variant: _v, label: _l, className: _c, ...buttonProps } = props
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { variant: _v, label: _l, className: _c, ...buttonProps } = props
   return (
     <button className={finalClass} tabIndex={0} {...buttonProps}>
       {label}
     </button>
   )
 })
+
+Button.displayName = "Button";

@@ -24,8 +24,9 @@ const testimonials = [
     image: "/asset/image3.jpg"
   },
 ];
-export const TestimonialItems = React.memo(({ quote, role, company, image, key }: { quote: string, role: string, company: string, image: string, key: string | number }) => {
-  return (<div key={key} className="rounded-2xl border-1 border-[#19363F73] bg-[#19363F0D] w-[185px] h-[300px] md:w-[330px] md:h-[420px] p-[18px] md:p-8 flex flex-col justify-between shrink-0">
+
+export const TestimonialItems = React.memo(({ quote, role, company, image }: { quote: string, role: string, company: string, image: string }) => {
+  return (<div className="rounded-2xl border-1 border-[#19363F73] bg-[#19363F0D] w-[185px] h-[300px] md:w-[330px] md:h-[420px] p-[18px] md:p-8 flex flex-col justify-between shrink-0">
     <p className="text-[12px] md:text-[16px]">
       “{quote}”
     </p>
@@ -44,6 +45,9 @@ export const TestimonialItems = React.memo(({ quote, role, company, image, key }
     </div>
   </div>)
 })
+
+TestimonialItems.displayName = "TestimonialItems";
+
 export const Testimonials = React.memo(() => {
   return (<section id="testimonials">
     <div className="text-center space-y-2 mt-30">
@@ -70,3 +74,4 @@ export const Testimonials = React.memo(() => {
   )
 })
 
+Testimonials.displayName = "Testimonials";

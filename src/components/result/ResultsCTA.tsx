@@ -39,3 +39,5 @@ export const ResultsCTA = React.memo(({ totalAnnualSavings, onConsult, onReport 
     </div>
   </div>
 })
+
+ResultsCTA.displayName = "ResultsCTA";

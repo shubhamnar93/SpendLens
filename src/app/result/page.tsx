@@ -1,10 +1,4 @@
 "use client"
-import { Button } from "@/components/Button"
-import { Headers } from "@/components/Headers"
-import { Calender } from "@/components/icons/Calender"
-import { Download } from "@/components/icons/Download"
-import { Sparkles } from "@/components/icons/Sparkles"
-import { TrendingDown } from "@/components/icons/TrendingDown"
 import { AISummaryBanner } from "@/components/result/AISummaryBanner"
 import { LeadCaptureDialog } from "@/components/result/LeadCaptureDialog"
 import { ResultsCTA } from "@/components/result/ResultsCTA"
@@ -21,12 +15,8 @@ export default function ResultPage() {
     reason:
       "Your reported monthly spend exceeds the standard plan price, which often means overages or an unnecessarily large subscription tier.",
     currentSpend: 100,
-    // InputPrice?: number
-    // OutputPrice?: number
     newSpend: 4.25,
     savings: 95.75,
-    // inputSavings?: number
-    // outputSavings?: number
     category: "coding",
     usageBudget: "High",
   }
@@ -34,8 +24,6 @@ export default function ResultPage() {
     toolName: "ChatGpt",
     planName: "Go",
     currentSpend: 100,
-    // InputPrice: input.InputPrice ? input.InputPrice : undefined,
-    // OutputPrice: input.OutputPrice,
     recommendations: [bestCheapestAI, bestCheapestAI],
     totalMonthlySavings: bestCheapestAI.savings
       ? bestCheapestAI.savings
@@ -61,8 +49,6 @@ export default function ResultPage() {
     toolName: "ChatGpt",
     planName: "Go",
     currentSpend: 100,
-    // InputPrice: input.InputPrice ? input.InputPrice : undefined,
-    // OutputPrice: input.OutputPrice,
     recommendations: [bestCheapestAI, bestCheapestAI],
     totalMonthlySavings: bestCheapestAI.savings
       ? bestCheapestAI.savings
@@ -93,7 +79,6 @@ export default function ResultPage() {
   const onReport = () => { setOpen(true); setIntent("report"); }
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
-      <Headers />
       <h1 className="text-3xl mt-20 font-bold tracking-tight text-black">Your audit results</h1>
       <p className="mt-2 text-[#62748e]">
         {results.length} tool{results.length > 1 ? "s" : ""} reviewed for Your stack.
@@ -120,4 +105,3 @@ export default function ResultPage() {
   )
 
 }
-

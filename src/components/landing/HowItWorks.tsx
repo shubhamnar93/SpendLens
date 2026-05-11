@@ -59,3 +59,5 @@ export const HowItWorks = React.memo(() => {
     </section>
   )
 })
+
+HowItWorks.displayName = "HowItWorks";

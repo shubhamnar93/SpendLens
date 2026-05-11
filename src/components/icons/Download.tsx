@@ -7,3 +7,5 @@ export const Download = React.memo(({ className }: { className?: string }) => {
     </svg>
   )
 })
+
+Download.displayName = "Download";

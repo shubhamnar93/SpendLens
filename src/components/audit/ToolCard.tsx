@@ -7,7 +7,6 @@ import { ToolForm } from "@/types/audit"
 
 
 type ToolCardProps = {
-  key: string | number
   index: number,
   canDelete: boolean,
   toolOptions: string[]
@@ -20,8 +19,8 @@ type ToolCardProps = {
 }
 
 export const ToolCard = React.memo((props: ToolCardProps) => {
-  const { key, index, canDelete, toolOptions, getPlansForTool, updateTool, tool, setTools, usageLevel, useCaseOptions } = props
-  return <div key={key} className="rounded-lg mt-10 border border-[#e2e8f0] bg-card p-5">
+  const { index, canDelete, toolOptions, getPlansForTool, updateTool, tool, setTools, usageLevel, useCaseOptions } = props
+  return <div className="rounded-lg mt-10 border border-[#e2e8f0] bg-card p-5">
     <div className="mb-4 flex items-center justify-between">
       <h2 className="font-semibold text-secondary">Tool #{index + 1}</h2>
 
@@ -75,3 +74,5 @@ export const ToolCard = React.memo((props: ToolCardProps) => {
     </div>
   </div>
 })
+
+ToolCard.displayName = "ToolCard";

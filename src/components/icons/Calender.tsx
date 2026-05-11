@@ -7,3 +7,5 @@ export const Calender = React.memo(({ className }: { className?: string }) => {
     </svg>
   )
 })
+
+Calender.displayName = "Calender";
