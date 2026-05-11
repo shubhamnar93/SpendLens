@@ -26,3 +26,10 @@
 **What I learned:** I did not learn anything new today because most of the time went into refining the UI.
 **Blockers / what I'm stuck on:** I am not stuck on anything, but building the UI took a lot of time since AI does not produce the exact result I want and requires manual adjustments.
 **Plan for tomorrow:** will create the UI for the result page, implement the email capture popover, and build the API routes.
+
+## Day 5 — 2026-05-11
+**Hours worked:** 6
+**What I did:** Created the result page, implemented the email capture popover, and set up the CI pipeline.
+**What I learned:** Learned how to create and configure a CI pipeline.
+**Blockers / what I'm stuck on:** I am not stuck on anything.
+**Plan for tomorrow:** I will build the API routes, and connect them with the UI
