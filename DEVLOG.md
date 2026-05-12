@@ -33,3 +33,11 @@
 **What I learned:** Learned how to create and configure a CI pipeline.
 **Blockers / what I'm stuck on:** I am not stuck on anything.
 **Plan for tomorrow:** I will build the API routes, and connect them with the UI
+
+
+## Day 6 — 2026-05-12
+**Hours worked:** 8
+**What I did:** Deployed the app, achieved a Lighthouse score of 100 across all metrics, and migrated the database layer from Prisma to Drizzle. 
+**What I learned:** Learned how Drizzle ORM works and how to integrate it into the existing stack.
+**Blockers / what I'm stuck on:** The backend is currently failing to accept requests, which is blocking further progress.
+**Plan for tomorrow:** Finish the backend, integrate AI features, and add an email submission flow
