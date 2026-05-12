@@ -1,13 +1,16 @@
 "use client"
-
 import { Button } from "@/components/Button"
 import { Headers } from "@/components/Headers"
 import { auditKnowledge } from "../../server/audit-engine/knowledge/dataset"
 import { useState } from "react"
 import { ToolCard } from "@/components/audit/ToolCard"
 import { ToolForm } from "@/types/audit"
+import { useTRPCClient } from "@/trpc/client"
+import { useRouter } from "next/navigation"
 
 export default function AuditPage() {
+  const trpcClient = useTRPCClient()
+  const router = useRouter()
   const usageLevel: string[] = ["low", "medium", "high"]
   const useCaseOptions = ['coding', 'writing', 'research', 'mixed', 'data', 'api']
   const toolOptions = Array.from(
@@ -31,6 +34,35 @@ export default function AuditPage() {
     teamSize: "",
   })
   const [tools, setTools] = useState<ToolForm[]>([createEmptyTool()])
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async () => {
+    if (!tools.length) return
+
+    const payload = {
+      tools: tools.map((tool) => ({
+        toolName: tool.toolName,
+        planName: tool.planName,
+        currentSpend: tool.useCase === 'api' ? undefined : Number(tool.currentSpend || 0),
+        InputPrice: tool.useCase === 'api' ? Number(tool.inputToken || 0) : undefined,
+        OutputPrice: tool.useCase === 'api' ? Number(tool.outputToken || 0) : undefined,
+        usageLevel: tool.usageLevel as 'low' | 'medium' | 'high',
+        teamSize: Number(tool.teamSize || 0),
+        primaryUseCase: tool.useCase as 'coding' | 'writing' | 'research' | 'mixed' | 'data' | 'api',
+      })),
+    }
+
+    setIsSubmitting(true)
+    try {
+      const result = await trpcClient.audit.runAudit.mutate(payload)
+      router.push(`/result/${result.shareLinkId}`)
+    } catch (error) {
+      console.error('Audit request failed', error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   const updateTool = (index: number, field: keyof ToolForm, value: string) => {
     setTools(prev => {
       const updated = [...prev]
@@ -67,7 +99,7 @@ export default function AuditPage() {
       ))}
       <div className="flex mt-4 items-center justify-center gap-4">
         <Button onClick={() => setTools(prev => [...prev, createEmptyTool()])} variant="ghost" className="hover:scale-none" label="+ Add another tool" size="xs" />
-        <Button variant="solid" className="bg-green-800" label="Run audit" size="xs" />
+        <Button onClick={handleSubmit} variant="solid" className={isSubmitting?"bg-green-800/50 cursor-progress":"bg-green-800"} label={isSubmitting ? "Running…" : "Run audit"} size="xs" />
       </div>
     </main>
 

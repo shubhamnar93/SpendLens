@@ -74,23 +74,23 @@ export function runAudit(input: AuditInput): AuditResult {
     currentSpend: input.currentSpend ? input.currentSpend : 0,
     InputPrice: input.InputPrice ? input.InputPrice : undefined,
     OutputPrice: input.OutputPrice,
-    recommendations: [bestCheapestAI],
-    totalMonthlySavings: bestCheapestAI.savings
+    recommendations: bestCheapestAI ? [bestCheapestAI] : [],
+    totalMonthlySavings: bestCheapestAI?.savings
       ? bestCheapestAI.savings
       : undefined,
-    totalAnnualSavings: bestCheapestAI.savings
+    totalAnnualSavings: bestCheapestAI?.savings
       ? bestCheapestAI.savings * 12
       : undefined,
-    totalInputSavings: bestCheapestAI.inputSavings
+    totalInputSavings: bestCheapestAI?.inputSavings
       ? bestCheapestAI.inputSavings
       : undefined,
-    totalOutputSavings: bestCheapestAI.outputSavings
+    totalOutputSavings: bestCheapestAI?.outputSavings
       ? bestCheapestAI.outputSavings
       : undefined,
     insights: bestCheapestAI
       ? [
           `Your current plan may be overspending. Consider switching to ${bestCheapestAI.planName} 
-           which could save you approximately $${input.primaryUseCase === "api" ? `${bestCheapestAI.inputSavings}$ on per million input token and ${bestCheapestAI.outputSavings}$ on per million output token` : `${getSavings(bestCheapestAI)}$ per month`} `,
+           which could save you approximately $${input.primaryUseCase === "api" ? `${bestCheapestAI.inputSavings}$ on per million input token and ${bestCheapestAI.outputSavings}$ on per million output token` : `${bestCheapestAI.savings ?? (bestCheapestAI.inputSavings ?? 0) + (bestCheapestAI.outputSavings ?? 0)}$ per month`} `,
         ]
       : [
           "Your current plan appears to be cost-effective based on our analysis.",
