@@ -35,6 +35,7 @@ export const ToolCard = React.memo((props: ToolCardProps) => {
 
     <div className="grid gap-4 md:grid-cols-2">
       <Select
+        ariaLabel="Tool name options"
         label="Tool name"
         options={toolOptions}
         value={tool.toolName}
@@ -42,6 +43,7 @@ export const ToolCard = React.memo((props: ToolCardProps) => {
       />
 
       <Select
+        ariaLabel="Plan name options"
         label="Plan name"
         options={getPlansForTool(tool.toolName)}
         value={tool.planName}
@@ -49,6 +51,7 @@ export const ToolCard = React.memo((props: ToolCardProps) => {
       />
 
       <Select
+        ariaLabel="Usage level options"
         label="Usage level"
         options={usageLevel}
         value={tool.usageLevel}
@@ -56,6 +59,7 @@ export const ToolCard = React.memo((props: ToolCardProps) => {
       />
 
       <Select
+        ariaLabel="Primary useCase options"
         label="Primary usecase"
         options={useCaseOptions}
         value={tool.useCase}

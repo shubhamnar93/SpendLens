@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
 
-export const Select = React.memo(({ options, value, setValue, label }: { options: string[], value: string, setValue: (value: string) => void, label: string }) => {
+export const Select = React.memo(({ options, value, setValue, label, ariaLabel }: { options: string[], value: string, setValue: (value: string) => void, label: string, ariaLabel: string }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -10,6 +10,7 @@ export const Select = React.memo(({ options, value, setValue, label }: { options
         {label}
       </label>
       <button
+        aria-label={ariaLabel}
         onClick={() => setOpen(!open)}
         type="button" role="combobox" aria-controls="radix-_r_2o_" aria-expanded="false" aria-autocomplete="none" dir="ltr" data-state="closed" className="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-[#e2e8f0] bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 mt-2">
         <span >
@@ -36,7 +37,7 @@ export const Select = React.memo(({ options, value, setValue, label }: { options
           ))}
         </div>
       )}
-      <select value={value} hidden>
+      <select value={value} onChange={(e) => setValue(e.target.value)} hidden>
         {options.map((opt) => (
           <option key={opt} value={opt}>{opt}</option>
         ))}
