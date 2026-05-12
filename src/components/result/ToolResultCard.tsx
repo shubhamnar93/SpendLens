@@ -7,18 +7,18 @@ export const ToolResultCard = React.memo(({ recommendation, isApi }: { isApi: bo
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-lg font-semibold text-black">{recommendation.toolName}</h3>
+            <h2 className="text-lg font-semibold text-black">{recommendation.toolName}</h2>
             <span className="rounded-full bg-muted px-2 py-0.5 text-xs text-[#62748e]">
               {recommendation.planName}
             </span>
-            <span className="rounded-full bg-[#008b1d]/10 px-2 py-0.5 text-xs font-medium text-[#008b1d]">
+            <span className="rounded-full bg-[#008b1d]/10 px-2 py-0.5 text-xs font-medium text-[#004D11]">
               {recommendation.category.toUpperCase()}
             </span>
           </div>
           <p className="mt-1 text-xs text-[#62748e]">{recommendation.usageBudget}</p>
         </div>
         {(recommendation.savings ?? 0) > 0 && (
-          <div className="rounded-md bg-[#008b1d] px-3 py-1 text-sm font-semibold text-white">
+          <div className="rounded-md bg-[#006616] px-3 py-1 text-sm font-semibold text-white">
             Save {recommendation.savings ?? 0}$/mo
           </div>
         )}
@@ -74,7 +74,7 @@ function Metric({
       <div className="text-xs uppercase tracking-wide text-[#62748e]">{label}</div>
       <div
         className={
-          "mt-1 text-base font-semibold " + (highlight ? "text-[#008b1d]" : "text-black")
+          "mt-1 text-base font-semibold " + (highlight ? "text-[#006616]" : "text-black")
         }
       >
         {value}

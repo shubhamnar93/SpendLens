@@ -15,7 +15,7 @@ export const ResultsCTA = React.memo(({ totalAnnualSavings, onConsult, onReport 
       <h2 className="text-2xl font-bold text-black">
         Ready to capture {totalAnnualSavings}$ a year?
       </h2>
-      <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
+      <p className="mx-auto mt-2 max-w-xl text-sm text-neutral-700">
         Get a tailored implementation plan from Credex, or take the full
         report with you to share internally.
       </p>
@@ -23,7 +23,7 @@ export const ResultsCTA = React.memo(({ totalAnnualSavings, onConsult, onReport 
     <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
       <button
         onClick={onConsult}
-        className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 shadow hover:bg-[#008b1d]/90 h-10 rounded-md px-8 bg-[#008b1d] text-white hover:opacity-90">
+        className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 shadow hover:bg-[#006616]/90 h-10 rounded-md px-8 bg-[#006616] text-white hover:opacity-90">
         <Calender />
         Book consulting with Credex
       </button>
