@@ -35,10 +35,10 @@ export const TestimonialItems = React.memo(({ quote, role, company, image }: { q
         <Image alt="" className="scale-125 object-cover object-top w-full h-full" width={8} height={8} src={image} />
       </div>
       <div className="">
-        <p className="text-[#1A1A1A] font-medium text-[9px] md:text-[16px]">
+        <p className="text-neutral-700 font-medium text-[9px] md:text-[16px]">
           {role}
         </p>
-        <p className="text-[#7F7F7F] text-[7px] md:text-sm">
+        <p className="text-neutral-700 text-[7px] md:text-sm">
           {company}
         </p>
       </div>
@@ -51,16 +51,16 @@ TestimonialItems.displayName = "TestimonialItems";
 export const Testimonials = React.memo(() => {
   return (<section id="testimonials">
     <div className="text-center space-y-2 mt-30">
-      <p className="text-[#7F7F7F] uppercase tracking-widest text-[10.5px] md:text-sm">
+      <p className="text-neutral-700 uppercase tracking-widest text-[10.5px] md:text-sm">
         Testimonials
       </p>
       <h1 className="text-[30px] md:text-[40px] font-pp-mori-semibold font-semibold">
         Our customer reviews
       </h1>
-      <p className="text-[#00000080] text-[12px] md:text-[16px] md:w-[65%] mx-auto">
+      <p className="text-neutral-700 text-[12px] md:text-[16px] md:w-[65%] mx-auto">
         See what other clients are saying about their experience with SpendLens
       </p>
-      <div className="text-[#00000080] text-[10px] md:text-[14px]">
+      <div className="text-neutral-700 text-[10px] md:text-[14px]">
         <p>(<b>Note</b>: Names, photos, and company names are all mocked. Results are also mocked.)</p>
       </div>
     </div>

@@ -30,7 +30,7 @@ export const FAQ = React.memo(() => {
       <h1 className="text-[22.5px] md:text-[40px] font-pp-mori-semibold font-semibold">
         Your Questions. Answered.
       </h1>
-      <p className="text-[#00000080] text-[12px] md:text-[16px]">
+      <p className="text-neutral-700 text-[12px] md:text-[16px]">
         Answers to all your questions, quickly and clearly
       </p>
     </div>
