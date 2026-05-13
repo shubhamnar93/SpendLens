@@ -74,7 +74,6 @@ export default function AuditPage() {
         primaryUseCase: tool.useCase as 'coding' | 'writing' | 'research' | 'mixed' | 'data' | 'api',
       })),
     }
-    console.log(payload)
     setIsSubmitting(true)
     try {
       const result = await trpcClient.audit.runAudit.mutate(payload)

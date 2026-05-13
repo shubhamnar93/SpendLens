@@ -1,10 +1,10 @@
 "use client"
-import { z } from "zod";
 import { Input } from "../Input";
 import { Button } from "../Button";
 import { useState } from "react";
 import { Calender } from "../icons/Calender";
 import { Download } from "../icons/Download";
+import { useTRPCClient } from "@/trpc/client";
 
 
 export type LeadIntent = "consulting" | "report";
@@ -18,60 +18,50 @@ export interface LeadData {
   createdAt: string;
 }
 
-const schema = z.object({
-  email: z.string().trim().email("Enter a valid email").max(255),
-  companyName: z.string().trim().max(120).optional().or(z.literal("")),
-  role: z.string().trim().max(80).optional().or(z.literal("")),
-  teamSize: z
-    .union([z.string().length(0), z.coerce.number().int().min(1).max(100000)])
-    .optional(),
-});
-
 interface Props {
   open: boolean;
   intent: LeadIntent | null;
   onOpenChange: (open: boolean) => void;
   onSubmit: (lead: LeadData) => void;
+  shareLinkId: string
 }
 
 export function LeadCaptureDialog(
 
-  { open, intent, onOpenChange, onSubmit }: Props
+  { open, intent, onOpenChange, shareLinkId }: Props
 ) {
   const [email, setEmail] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [role, setRole] = useState("");
-  const [teamSize, setTeamSize] = useState("");
+  const [teamSize, setTeamSize] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const trpcClient = useTRPCClient()
 
+  async function handleSubmit(e: React.FormEvent) {
 
-  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const parsed = schema.safeParse({ email, companyName, role, teamSize });
-    if (!parsed.success) {
-      return;
-    }
-    if (!intent) return;
-    const lead: LeadData = {
-      email: parsed.data.email,
-      companyName: parsed.data.companyName || undefined,
-      role: parsed.data.role || undefined,
-      teamSize:
-        typeof parsed.data.teamSize === "number" ? parsed.data.teamSize : undefined,
-      intent,
-      createdAt: new Date().toISOString(),
-    };
+    setIsLoading(true)
     try {
-      const key = "spendlens-leads";
-      const prev = JSON.parse(sessionStorage.getItem(key) || "[]");
-      sessionStorage.setItem(key, JSON.stringify([...prev, lead]));
-    } catch {
-      /* ignore */
+      const result = await trpcClient.user.createUser.mutate({
+        isConsulting: intent === "consulting",
+        shareLinkId: shareLinkId,
+        email: email,
+        companyName: companyName || undefined,
+        role: role || undefined,
+        teamSize: teamSize,
+      })
+      console.log('email request failed', result)
+    } catch (error) {
+      console.error('email request failed', error)
+    } finally {
+      setIsLoading(false)
+      setEmail("");
+      setCompanyName("");
+      setRole("");
+      setTeamSize(1);
+      onOpenChange(false)
     }
-    onSubmit(lead);
-    setEmail("");
-    setCompanyName("");
-    setRole("");
-    setTeamSize("");
+
   }
   //
   return (
@@ -95,13 +85,25 @@ export function LeadCaptureDialog(
 
 
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <Input required label="Work email" placeholder="you@comapany.com" />
-          <Input label="Company name (optional)" placeholder="company name" />
+          <Input required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            label="Work email" placeholder="you@comapany.com" />
+          <Input
+            value={companyName}
+            onChange={(e) => setCompanyName(e.target.value)}
+            label="Company name (optional)" placeholder="company name" />
           <div className="grid grid-cols-2 gap-3">
-            <Input label="Role (optional)" placeholder="cto, ceo, ..." />
-            <Input label="Team size (optional)" placeholder="5" />
+            <Input
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              label="Role (optional)" placeholder="cto, ceo, ..." />
+            <Input
+              value={teamSize}
+              onChange={(e) => setTeamSize(Number(e.target.value))}
+              label="Team size (optional)" placeholder="5" />
           </div>
-          <Button as="button" label={intent == "report" ? "Download report" : "Get my booking link"} className=" bg-[#008b1d] text-md p-[8px] w-full rounded-xl flex justify-center items-center hover:scale-none hover:bg-[#008b1d]/85" />
+          <Button as="button" label={intent == "report" ? "Download report" : "Get my booking link"} disabled={isLoading} className={` bg-[#008b1d] text-md p-[8px] w-full rounded-xl flex justify-center items-center hover:scale-none hover:bg-[#008b1d]/85 ${isLoading && "bg-[#008b1d]/50 hover:bg-[#008b1d]/50"}`} />
         </form>
 
 

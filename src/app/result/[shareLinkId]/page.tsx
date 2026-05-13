@@ -33,8 +33,22 @@ export default function ResultPage() {
 
   const [open, setOpen] = React.useState(false)
   const [intent, setIntent] = React.useState<"consulting" | "report">("consulting")
-  const onConsult = () => { setOpen(true); setIntent("consulting"); }
+  const onConsult = () => {
+    setOpen(true);
+    setIntent("consulting");
+  }
   const onReport = () => { setOpen(true); setIntent("report"); }
+  // const [isSubmitting, setIsSubmitting] = React.useState(false)
+  // const handleSubmit = async () => {
+  //   try {
+  //     const result = await trpcClient.user.createUser.mutate({ isConsulting: intent === "consulting", teamSize:  })
+  //   } catch (error) {
+  //     console.error('Audit request failed', error)
+  //   } finally {
+  //     setIsSubmitting(false)
+  //   }
+  //
+  // }
 
   if (loading) {
     return (
@@ -68,7 +82,7 @@ export default function ResultPage() {
         })}
       </div>
       <ResultsCTA onConsult={onConsult} onReport={onReport} totalAnnualSavings={data?.audit.annualSaving || 0} />
-      <LeadCaptureDialog open={open} intent={intent} onOpenChange={setOpen} onSubmit={() => { }} key={1} />
+      <LeadCaptureDialog open={open} intent={intent} onOpenChange={setOpen} onSubmit={() => { }} key={1} shareLinkId={shareLinkId} />
     </main>
   )
 
