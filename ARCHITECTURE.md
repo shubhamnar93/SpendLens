@@ -2,202 +2,118 @@
 
 ## Product Summary
 
-This product is a free web application that audits a startup’s AI tool spending and instantly shows:
+This is a free web application that audits a startup’s AI tool spend and instantly shows:
 
 * Where they are overspending
-* Which plans or tools they should switch to
-* How much money they can save monthly and annually
+* Which plans or tools to switch to
+* Total monthly and annual savings
 
-After delivering value upfront, the app offers a **shareable report** and an **optional consultation**, helping companies optimize AI costs while generating qualified leads for Credex’s discounted AI infrastructure credits.
-
----
-
-# Tech Stack
-
-## Next.js
-**Why**
-* Built-in SSR, routing, and API layer
-* Optimized for Vercel deployment
-* Enables faster development
+It delivers value immediately and creates a qualified lead path through a shareable report and optional consultation.
 
 ---
 
-## TypeScript (Strict Mode)
-**Why**
-* Prevents runtime bugs via static typing
-* Enables end-to-end type safety
-* Makes APIs, database queries, and validation safer
+## Data Flow
+
+1. User visits the app and completes the audit form with AI tools, monthly spend, team size, and use case.
+2. Frontend validates input and sends it to the backend via `tRPC`.
+3. The backend audit engine loads rules and knowledge data, then evaluates each tool against plan pricing, usage patterns, and cheaper alternatives.
+4. The audit engine computes itemized recommendations, savings, and rationale.
+5. Results are returned to the frontend and rendered as:
+   * tool-by-tool recommendations
+   * total monthly/annual savings
+   * benchmark comparison and summary copy
+6. If the user opts in, the app stores lead details in the database and generates a shareable report URL.
+
+This flow ensures user input is transformed into a deterministic audit result within a single request/response cycle, with optional persistence for lead capture and sharing.
 
 ---
 
-## tRPC
-**Why**
-* End-to-end type safety between frontend and backend
-* No need to write REST endpoints or Swagger documentation
-* Faster development with fewer integration bugs
+## Tech Stack and Why It Was Chosen
+
+### Next.js
+* Provides built-in routing, server rendering, and API handling in one framework.
+* Keeps frontend and backend logic co-located for faster iteration.
+* Works smoothly with Vercel and modern JAMstack deployment.
+
+### TypeScript
+* Adds compile-time safety across UI, API, and database code.
+* Reduces runtime errors in a product that makes recommendation logic visible to users.
+* Improves maintainability for future audit rule expansion.
+
+### tRPC
+* Enables end-to-end typed communication between React components and backend handlers.
+* Avoids writing boilerplate REST endpoints or OpenAPI contracts.
+* Simplifies data validation and refactoring.
+
+### PostgreSQL
+* Reliable relational store for audit inputs, report share links, and lead records.
+* ACID guarantees ensure saved reports and leads are consistent.
+* Scales well vertically and with modern serverless-friendly hosted providers.
+
+### Drizzle
+* Provides type-safe database access and migrations.
+* Makes schema changes and query composition easier than raw SQL.
+* Fits well with the TypeScript-first stack.
+
+### Tailwind CSS
+* Speeds UI development and keeps the UI consistent.
+* Eliminates custom CSS complexity for MVP styling.
+
+### Vercel
+* Zero-config deployment for Next.js apps.
+* Automatic CI/CD and preview deployments from GitHub.
+* Good fit for a startup MVP with serverless functions and global CDN.
 
 ---
 
-## PostgreSQL (Neon)
-**Why**
-* Reliable and scalable relational database
-* ACID compliance and strong ecosystem
-* Works well with serverless deployment
+## Handling 10k Audits/Day
+
+If this product needed to handle 10k audits per day, I would make these changes:
+
+1. Separate audit processing from request handling
+   * Use a lightweight request queue or job processor for audit analysis.
+   * Return a fast response immediately and update results asynchronously if needed.
+
+2. Cache repeated audit results
+   * Cache common tool/package combinations and benchmarking responses.
+   * Reuse static rule and pricing data across requests.
+
+3. Add a dedicated analytics and persistence layer
+   * Move leads, reports, and audit history to a scalable managed database.
+   * Use read replicas or partitioning for heavy read workloads.
+
+4. Scale the backend
+   * Run the API on auto-scaled serverless functions or containerized services.
+   * Use a database tier that supports high-concurrency read/write workloads.
+
+5. Improve observability and error handling
+   * Add logging, metrics, and tracing for audit throughput, latency, and failures.
+   * Monitor queue depth, request duration, and database performance.
+
+6. Harden the audit engine
+   * Convert rule evaluation to a more efficient pipeline and avoid repeated computations.
+   * Normalize tool/pricing data and use precomputed savings formulas.
+
+These changes keep the current stack while shifting the architecture to support higher throughput, better caching, and more robust service scaling.
 
 ---
 
-## Prisma
-**Why**
-* Type-safe database access
-* Easy schema migrations
-* Excellent developer experience
-* Tight integration with TypeScript and PostgreSQL
+## Key Architecture Decisions
+
+* Keep the audit engine as a deterministic backend service to maintain consistent recommendations.
+* Use `tRPC` to minimize integration friction and preserve type safety.
+* Choose PostgreSQL for structured lead and report data, with Drizzle for developer ergonomics.
+* Host on Vercel for fast prototyping and deployment while retaining the option to move to a more dedicated backend if scale demands it.
 
 ---
 
-## Tailwind CSS
-**Why**
-* Rapid UI development
-* Consistent design system
-* Small CSS bundle size
+## Future Improvements
 
----
+* Add a dedicated job queue or serverless worker for high-volume audit processing.
+* Implement rate limiting and API protection for shared report generation.
+* Introduce a metrics dashboard for usage, savings impact, and lead conversion.
+* Expand the audit knowledge base to support additional AI tools and spending patterns.
 
-## Vercel
-**Why**
-* Zero-configuration deployment for Next.js
-* Global CDN and serverless functions
-* Automatic CI/CD from GitHub
-* Preview deployments for every commit
-* Ideal for fast MVP shipping
-
----
-
-# Features To Be Implemented
-
-## Landing Page
-
-* CTA button → “Run Free AI Spend Audit”
-* Navigates to the form page
-
----
-
-## Input Form
-
-Collect:
-
-* AI tools used
-* Monthly spend
-* Team size
-* Primary use case
-* Custom tool input (optional)
-
-Requirement:
-
-* Form state must persist across page reloads.
-
----
-
-## On-Screen Audit Results
-
-The results page must show:
-
-### Audit Insights
-
-* Where the company is overspending
-* What to switch or downgrade
-* Total potential monthly and annual savings
-
-### UI Requirements
-
-For each tool:
-
-* Current spend
-* Recommended action
-* Spend after recommendation
-* Savings amount
-* One-sentence reason
-
-Summary section:
-
-* Total monthly savings
-* Total annual savings
-* AI-generated summary (with fallback)
-
-### Benchmark Mode
-
-Display comparison such as:
-
-> “Your AI spend per developer is X — companies your size average Y.”
-
----
-
-## Email Registration
-
-Capture:
-
-* Email
-* Company name
-* Role
-* Team size
-
-
-### Lead Qualification Rule
-
-If savings > **$500/month**:
-
-* Offer option to book consultation
-* Mark as high-value lead
-### Email Workflow
-
-* Send transactional confirmation email
-* Inform user that Credex will reach out for high-savings cases
-
-### Security
-
-* hCaptcha required
-* Prevent abuse and bot submissions
-
----
-
-## Audit Engine Requirements
-
-The audit engine uses a **static knowledge dataset** and must determine:
-
-1. Are users on the correct plan for their usage?
-2. Is there a cheaper plan from the same vendor?
-3. Is there a significantly cheaper alternative tool with similar capabilities?
-
----
-
-## Shareable Report URL
-
-Must support:
-
-* Open Graph tags for link previews
-* Public page showing tools and savings numbers
-
----
-
-## Performance Requirements
-
-Lighthouse mobile scores on deployed URL:
-
-* Performance ≥ 85
-* Accessibility ≥ 90
-* Best Practices ≥ 90
-
----
-
-## Testing Requirements
-
-* Minimum **5 tests** for the audit engine
-* **80% test coverage**
-* GitHub Actions CI workflow:
-
-`.github/workflows/ci.yml`
-
-Pipeline must run:
 
 * Linting
 * Tests on every push to main
@@ -215,7 +131,7 @@ flowchart TD
     B --> C
 
     C["Company info form
-    Fill details + complete CAPTCHA"]:::userAction
+    Fill details"]:::userAction
 
     C --> D
 
@@ -257,7 +173,7 @@ flowchart TD
 
 1. User lands on the landing page
 2. Clicks **Run Free AI Spend Audit**
-3. Fills company information and completes CAPTCHA
+3. Fills company information
 4. Audit engine processes data
 5. Results are displayed instantly
 6. User enters email to:
@@ -267,7 +183,7 @@ flowchart TD
 8. User can share the savings via public report URL
 
 ---
-# Database Desgin
+# Database Design
 
 ```mermaid
 erDiagram
@@ -297,14 +213,6 @@ erDiagram
         DateTime updatedAt
     }
 
-    Tool {
-        String id PK
-        String auditId FK
-        String toolName
-        Int seats
-        String useCase
-    }
-
     Recommendation {
         String id PK
         String auditId FK
@@ -314,10 +222,16 @@ erDiagram
         Float currentSpend
         Float newSpend
         Float savings
+        Float inputPrice
+        Float outputPrice
+        Float inputSavings
+        Float outputSavings
+        String category
+        String planName
+        String usageBudget
     }
 
     User ||--o{ Audit : "has"
-    Audit ||--o{ Tool : "uses"
     Audit ||--o{ Recommendation : "has"
 ```
 
@@ -325,7 +239,7 @@ erDiagram
 
 # Detailed Data Flow
 
-## Audit genration 
+## Audit generation 
 ```mermaid
 flowchart TD
     A([User submits form]) --> B[Frontend\ntrpc.audit.run]
@@ -367,7 +281,7 @@ flowchart TD
     G --> H
 
     subgraph Server
-        H --> I[Verify hCaptcha]
+        H --> I[Rate Limit Check]
         I --> J[Save user record\nDB write]
         J --> K{Booked consulting?}
 
@@ -386,7 +300,7 @@ flowchart TD
 2. For above it give them option to book consulting or download report to cature email
 4. User enters email.
 5. Server:
-    * Verifies hCaptcha
+    * Performs rate limit check
     * Saves user record
     * Sends confirmation email with report for people who have booked cosulting
     * Sends report who havent booked consulting cost >$100/mo
@@ -407,7 +321,8 @@ Because the dataset is static:
 * Zod validation for all API inputs
 * Server-side validation only (never trust client)
 ## Abuse Prevention
-* hCaptcha on email submission
+* Rate limiting on all API endpoints
+* Protection for email submission and shared report generation
 ## Data Protection
 * No passwords stored
 * Only business email + company info
@@ -451,99 +366,66 @@ Failure blocks deployment.
 # Folder structure
 
 ├── src/
-│
-│   ├── app/                       
-│   │   ├── (marketing)/
-│   │   │   └── page.tsx         
-│   │   │
+│   ├── app/
 │   │   ├── audit/
-│   │   │   ├── page.tsx         
-│   │   │   └── result/
-│   │   │       └── [auditId]/
-│   │   │           └── page.tsx  
-│   │   │
-│   │   ├── report/
-│   │   │   └── [shareId]/
-│   │   │       └── page.tsx     
-│   │   │
+│   │   │   └── page.tsx
+│   │   ├── result/
+│   │   │   └── [shareLinkId]/
+│   │   │       └── page.tsx
 │   │   ├── api/
-│   │   │   └── trpc/[trpc]/route.ts
-│   │   │
+│   │   │   └── trpc/
+│   │   │       └── [trpc]/
+│   │   │           └── route.ts
 │   │   ├── layout.tsx
 │   │   └── globals.css
-│
-│   ├── components/               
-│   │   ├── landing/
+│   ├── components/
 │   │   ├── audit/
-│   │   ├── results/
-│   │   ├── report/
-│   │   └── ui/                  
-│
-│   ├── server/                 
-│   │
-│   │   ├── db/
-│   │   │   ├── client.ts        
-│   │   │   └── queries/         
-│   │   │       ├── audit.ts
-│   │   │       └── user.ts
-│   │   │
-│   │   ├── audit-engine/        
-│   │   │   ├── engine.ts        
-│   │   │   ├── index.ts        
-│   │   │   ├── types.ts
-│   │   │   ├── rules/
-│   │   │   │   ├── overspendDetector.ts
-│   │   │   │   └── teamSizeOptimisePlan.ts
-│   │   │   │
-│   │   │   └── knowledge/
-│   │   │       └── dataset.ts    
-│   │   │
-│   │   ├── email/
-│   │   │   ├── sendReportEmail.ts
-│   │   │   └── sendConsultEmail.ts
-│   │   │
-│   │   ├── captcha/
-│   │   │   └── verifyHCaptcha.ts
-│   │   │
-│   │   └── utils/
-│   │       └── generateShareId.ts
-│
+│   │   ├── landing/
+│   │   ├── result/
+│   │   ├── icons/
+│   │   ├── Button.tsx
+│   │   ├── Headers.tsx
+│   │   ├── Input.tsx
+│   │   └── Select.tsx
+│   ├── db/
+│   │   ├── index.ts
+│   │   ├── relations.ts
+│   │   └── schema.ts
 │   ├── trpc/
-│   │   ├── init.ts
-│   │   ├── routers/
-│   │   │   ├── _app.ts
-│   │   │   ├── audit.ts          
-│   │   │   ├── lead.ts          
-│   │   │   └── report.ts        
-│   │   │
 │   │   ├── client.tsx
+│   │   ├── init.ts
 │   │   ├── query-client.ts
-│   │   └── server.tsx
-│
-│   ├── lib/                     
-│   │   ├── env.ts
-│   │   ├── constants.ts
-│   │   └── formatCurrency.ts
-│
+│   │   ├── server.tsx
+│   │   └── routers/
+│   │       ├── _app.ts
+│   │       ├── audit.ts
+│   │       └── user.ts
+│   ├── server/
+│   │   └── audit-engine/
+│   │       ├── auditSummaryPrompt.ts
+│   │       ├── engine.ts
+│   │       ├── index.ts
+│   │       ├── types.ts
+│   │       ├── knowledge/
+│   │       │   └── dataset.ts
+│   │       └── rules/
+│   │           ├── overspendDetector.ts
+│   │           └── teamSizeOptimisePlan.ts
+│   ├── tests/
+│   │   ├── audit-engine/
+│   │   │   ├── overspendDetector.test.ts
+│   │   │   ├── runAudit.test.ts
+│   │   │   └── teamSizeOptimisePlan.test.ts
 │   ├── types/
-│   │   ├── audit.ts
-│   │   └── tool.ts
-│
-│   └── styles/
-│   │    └── tailwind.css
-│   │
-|   └── tests/
-│       └── audit-engine/
-│            ├── overspendDetector.test.ts
-│            ├── teamSizeOptimisePlan.test.ts
-│            └── runAudit.test.ts
-│
+│   │   └── audit.ts
+│   └── middleware.ts
+├── lib/
+│   └── audit/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
-│
 ├── package.json
 ├── tsconfig.json
-└── next.config.js
+└── next.config.ts
 
 ---

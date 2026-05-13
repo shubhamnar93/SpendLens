@@ -61,7 +61,7 @@ export const Headers = React.memo(() => {
         <p className="text-[#086841] text-[43px] font-semibold font-pp-mori-semibold mt-0">SpendLens</p>
       </Link>
       <div className="flex">
-        <button className="mr-8 cursor-pointer">Run Free AI Spend Audit</button>
+        <button className="mr-8 cursor-pointer" onClick={() => router.push("/audit")}>Run Free AI Spend Audit</button>
         <button className="mr-8 cursor-pointer" onClick={() => scrollToSection("testimonials")}>Testimonials</button>
         <button className="mr-8 cursor-pointer" onClick={() => scrollToSection("HowItWorks")}>How It Work</button>
         <button className="mr-4 cursor-pointer" onClick={() => scrollToSection("FAQ")}>FAQ</button>
