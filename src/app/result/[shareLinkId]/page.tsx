@@ -5,104 +5,70 @@ import { ResultsCTA } from "@/components/result/ResultsCTA"
 import { ResultsSummaryCards } from "@/components/result/ResultsSummaryCards"
 import { ToolResultCard } from "@/components/result/ToolResultCard"
 import { AuditRecommendation } from "@/server/audit-engine"
-import React from "react"
-// import { useParams } from "next/navigation"
+import React, { useEffect } from "react"
+import { useParams } from "next/navigation"
+import { useTRPCClient } from "@/trpc/client"
+import { AuditResult } from "@/types/audit"
 
 export default function ResultPage() {
-  // const {shareLinkId}:{shareLinkId:string} = useParams()
+  const trpcClient = useTRPCClient()
+  const { shareLinkId }: { shareLinkId: string } = useParams()
+  const [data, setData] = React.useState<AuditResult | null>(null)
+  const [loading, setLoading] = React.useState(true)
 
-  const bestCheapestAI: AuditRecommendation = {
-    toolName: "ChatGpt",
-    planName: "Go",
-    action: "Review overages and usage patterns",
-    reason:
-      "Your reported monthly spend exceeds the standard plan price, which often means overages or an unnecessarily large subscription tier.",
-    currentSpend: 100,
-    newSpend: 4.25,
-    savings: 95.75,
-    category: "coding",
-    usageBudget: "High",
-  }
-  const results = [{
-    toolName: "ChatGpt",
-    planName: "Go",
-    currentSpend: 100,
-    recommendations: [bestCheapestAI, bestCheapestAI],
-    totalMonthlySavings: bestCheapestAI.savings
-      ? bestCheapestAI.savings
-      : undefined,
-    totalAnnualSavings: bestCheapestAI.savings
-      ? bestCheapestAI.savings * 12
-      : undefined,
-    totalInputSavings: bestCheapestAI.inputSavings
-      ? bestCheapestAI.inputSavings
-      : undefined,
-    totalOutputSavings: bestCheapestAI.outputSavings
-      ? bestCheapestAI.outputSavings
-      : undefined,
-    insights: bestCheapestAI
-      ? [
-        `Your current plan may be overspending. Consider switching to ${bestCheapestAI.planName} 
-           which could save you approximately $${100} per month `,
-      ]
-      : [
-        "Your current plan appears to be cost-effective based on our analysis.",
-      ],
-  }, {
-    toolName: "ChatGpt",
-    planName: "Go",
-    currentSpend: 100,
-    recommendations: [bestCheapestAI, bestCheapestAI],
-    totalMonthlySavings: bestCheapestAI.savings
-      ? bestCheapestAI.savings
-      : undefined,
-    totalAnnualSavings: bestCheapestAI.savings
-      ? bestCheapestAI.savings * 12
-      : undefined,
-    totalInputSavings: bestCheapestAI.inputSavings
-      ? bestCheapestAI.inputSavings
-      : undefined,
-    totalOutputSavings: bestCheapestAI.outputSavings
-      ? bestCheapestAI.outputSavings
-      : undefined,
-    insights: bestCheapestAI
-      ? [
-        `Your current plan may be overspending. Consider switching to ${bestCheapestAI.planName} 
-           which could save you approximately $${100} per month `,
-      ]
-      : [
-        "Your current plan appears to be cost-effective based on our analysis.",
-      ],
-  }]
-  const totalAnnualSavings = 900
+  useEffect(() => {
+    async function loadAudit() {
+      try {
+        const result = await trpcClient.audit.getAudit.query({ shareLinkId })
+        setData(result)
+      } catch (err) {
+        console.error("Failed to load audit", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadAudit()
+  }, [shareLinkId, trpcClient.audit.getAudit])
+
   const summary = "Your stack found roughly $75/month ($900/yr) in savings across 1 tool. Biggest win: downgrade pro or consolidate seats on jie — You're paying well above the moderate-usage benchmark for 1 seat(s)."
   const [open, setOpen] = React.useState(false)
   const [intent, setIntent] = React.useState<"consulting" | "report">("consulting")
   const onConsult = () => { setOpen(true); setIntent("consulting"); }
   const onReport = () => { setOpen(true); setIntent("report"); }
+
+  if (loading) {
+    return (
+      <main className="mx-auto max-w-6xl px-6 py-12 flex items-center justify-center min-h-[60vh]">
+        <div className="flex flex-col items-center gap-4">
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-300 border-t-black" />
+          <p className="text-[#62748e]">Loading your audit results...</p>
+        </div>
+      </main>
+    )
+  }
+
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
       <h1 className="text-3xl mt-20 font-bold tracking-tight text-black">Your audit results</h1>
       <p className="mt-2 text-[#62748e]">
-        {results.length} tool{results.length > 1 ? "s" : ""} reviewed for Your stack.
+        {data?.recommendations.length} tool{data?.recommendations.length ? data.recommendations.length > 1 ? "s" : "" : ""} reviewed for Your stack.
       </p>
 
-      {/* Summary cards */}
-      <ResultsSummaryCards results={results} />
+      <ResultsSummaryCards resultsLength={data?.recommendations.length} audit={data?.audit} />
 
-      {/* AI summary */}
       <AISummaryBanner summary={summary} />
-      {/* Per-tool cards */}
+
       <div className="mt-8 space-y-4">
-        {results.map((ra, i) => {
-          const r = ra.recommendations[0]
-          const isApi = r.category === "api";
+        {data?.recommendations.map((ra, i) => {
+          const isApi = ra.category === "api";
+          if (ra.currentSpend === undefined) return null; // hide zero-spend tools for now
           return (
-            <ToolResultCard recommendation={r} isApi={isApi} key={i} />
+            <ToolResultCard recommendation={ra as AuditRecommendation} isApi={isApi} key={i} />
           );
         })}
       </div>
-      <ResultsCTA onConsult={onConsult} onReport={onReport} totalAnnualSavings={totalAnnualSavings} />
+      <ResultsCTA onConsult={onConsult} onReport={onReport} totalAnnualSavings={data?.audit.annualSaving || 0} />
       <LeadCaptureDialog open={open} intent={intent} onOpenChange={setOpen} onSubmit={() => { }} key={1} />
     </main>
   )

@@ -30,8 +30,8 @@ jobs:
       - name: Setup env
         run: echo "DATABASE_URL=postgresql://test:test@localhost:5432/test" >> .env
 
-      - name: Generate Prisma Client
-        run: npx prisma generate
+      - name: Generate drizzle client
+        run: npx drizzle-kit generate
 
       - name: Lint
         run: npm run lint

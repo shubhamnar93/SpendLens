@@ -1,3 +1,6 @@
+import { AppRouter } from "@/trpc/routers/_app"
+import { inferProcedureOutput } from "@trpc/server"
+
 export type ToolForm = {
   toolName: string
   planName: string
@@ -8,3 +11,5 @@ export type ToolForm = {
   outputToken?: string
   teamSize: string
 }
+
+export type AuditResult = inferProcedureOutput<AppRouter['audit']['getAudit']>

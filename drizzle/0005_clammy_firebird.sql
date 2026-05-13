@@ -1,0 +1,1 @@
+ALTER TABLE "audits" DROP COLUMN "use_case";

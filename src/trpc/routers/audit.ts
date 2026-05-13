@@ -26,7 +26,12 @@ export const auditRouter = createTRPCRouter({
       console.log('with tools', tools)
 
       const runResults = tools.map((toolInput) => runAuditEngine(toolInput));
-      const allRecommendations = runResults.flatMap((result) => result.recommendations);
+      const allRecommendations = runResults.flatMap((result) =>
+        result.recommendations.map((rec) => ({
+          ...rec,
+          category: rec.category ?? 'mixed',
+        })),
+      );
       const allInsights = runResults.flatMap((result) => result.insights);
 
       const totalMonthlySavings = runResults.reduce(
@@ -48,8 +53,7 @@ export const auditRouter = createTRPCRouter({
 
       await db.insert(audits).values({
         id: auditId,
-        userId: null,
-
+        userId: 'anonymous',
         monthlySaving: totalMonthlySavings,
         annualSaving: totalAnnualSavings,
         totalCurrentSpend,
@@ -68,13 +72,37 @@ export const auditRouter = createTRPCRouter({
           newSpend: rec.newSpend,
           auditId,
           savings: rec.savings,
+          category: rec.category,
+          planName: rec.planName,
+          usageBudget: rec.usageBudget,
         })
       }
 
       return {
         shareLinkId,
+        audit: {
+          monthlySaving: totalMonthlySavings,
+          annualSaving: totalAnnualSavings,
+          totalCurrentSpend,
+          totalOptimizedSpend,
+          summary: allInsights.join('\n'),
+          teamSize: tools.reduce((sum, tool) => sum + tool.teamSize, 0),
+        }
       };
     }),
+  getAudit: baseProcedure.input(z.object({
+    shareLinkId: z.string(),
+  })).query(async (opts) => {
+    const { shareLinkId } = opts.input
+    const audit = await db.query.audits.findFirst({
+      where: (audit, { eq }) => eq(audit.shareLinkId, shareLinkId),
+    })
+    const recommendations = await db.query.recommendations.findMany({
+      where: (rec, { eq }) => eq(rec.auditId, audit?.id ?? ''),
+    })
+    if (!audit) return null
+    return { audit, recommendations }
+  }),
 });
 
 export type auditRouter = typeof auditRouter;

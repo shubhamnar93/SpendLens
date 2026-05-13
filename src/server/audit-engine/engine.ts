@@ -75,6 +75,7 @@ export function runAudit(input: AuditInput): AuditResult {
     InputPrice: input.InputPrice ? input.InputPrice : undefined,
     OutputPrice: input.OutputPrice,
     recommendations: bestCheapestAI ? [bestCheapestAI] : [],
+    useCase: input.primaryUseCase,
     totalMonthlySavings: bestCheapestAI?.savings
       ? bestCheapestAI.savings
       : undefined,

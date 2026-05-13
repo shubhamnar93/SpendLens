@@ -106,6 +106,9 @@ export const recommendations = pgTable(
     action: text("action").notNull(),
     reason: text("reason").notNull(),
 
+    category: text("category").notNull(),
+    planName: text("plan_name").notNull(),
+    usageBudget: text("usage_budget").notNull(),
     currentSpend: real("current_spend"),
     newSpend: real("new_spend"),
     savings: real("savings"),

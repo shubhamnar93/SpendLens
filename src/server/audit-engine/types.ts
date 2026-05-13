@@ -58,7 +58,7 @@ export type AuditRecommendation = {
   planName: string
   action: string
   reason: string
-  currentSpend?: number
+  currentSpend?: number | undefined
   InputPrice?: number
   OutputPrice?: number
   newSpend: number
@@ -77,6 +77,7 @@ export type AuditBenchmark = {
 
 export type AuditResult = {
   toolName: string
+  useCase: AuditUseCase
   planName: string
   currentSpend?: number
   InputPrice?: number

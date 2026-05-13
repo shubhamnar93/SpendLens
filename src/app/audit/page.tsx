@@ -39,8 +39,7 @@ export default function AuditPage() {
   const handleSubmit = async () => {
     if (!tools.length) return
 
-    const payload = {
-      tools: tools.map((tool) => ({
+    const payload = { tools: tools.map((tool) => ({
         toolName: tool.toolName,
         planName: tool.planName,
         currentSpend: tool.useCase === 'api' ? undefined : Number(tool.currentSpend || 0),
@@ -51,7 +50,6 @@ export default function AuditPage() {
         primaryUseCase: tool.useCase as 'coding' | 'writing' | 'research' | 'mixed' | 'data' | 'api',
       })),
     }
-
     setIsSubmitting(true)
     try {
       const result = await trpcClient.audit.runAudit.mutate(payload)

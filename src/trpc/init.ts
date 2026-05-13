@@ -1,4 +1,5 @@
 import { initTRPC } from '@trpc/server';
+import superjson from "superjson"
 
 /**
  * This context creator is used to define the context for tRPC procedures.
@@ -6,7 +7,7 @@ import { initTRPC } from '@trpc/server';
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const createTRPCContext = async (_opts: { headers: Headers }) => {
-  return { userId: 'user_123' };
+  return {user: null};
 };
 
 // Avoid exporting the entire t-object
@@ -19,7 +20,7 @@ const t = initTRPC
     /**
      * @see https://trpc.io/docs/server/data-transformers
      */
-    // transformer: superjson,
+    transformer: superjson,
   });
 
 // Base router and procedure helpers
