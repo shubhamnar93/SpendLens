@@ -68,28 +68,6 @@ export const audits = pgTable(
 )
 
 /* ======================================================
-   TOOLS
-====================================================== */
-
-export const tools = pgTable(
-  "tools",
-  {
-    id: text("id").primaryKey().notNull(),
-
-    auditId: text("audit_id")
-      .notNull()
-      .references(() => audits.id, { onDelete: "cascade" }),
-
-    toolName: text("tool_name").notNull(),
-    seats: integer("seats").notNull(),
-    useCase: text("use_case"),
-  },
-  (table) => ({
-    auditIdx: index("tool_audit_idx").on(table.auditId),
-  })
-)
-
-/* ======================================================
    RECOMMENDATIONS
 ====================================================== */
 
@@ -135,16 +113,9 @@ export const auditsRelations = relations(audits, ({ one, many }) => ({
     fields: [audits.userId],
     references: [users.id],
   }),
-  tools: many(tools),
   recommendations: many(recommendations),
 }))
 
-export const toolsRelations = relations(tools, ({ one }) => ({
-  audit: one(audits, {
-    fields: [tools.auditId],
-    references: [audits.id],
-  }),
-}))
 
 export const recommendationsRelations = relations(
   recommendations,

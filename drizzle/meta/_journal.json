@@ -50,6 +50,13 @@
       "when": 1778654274420,
       "tag": "0006_sparkling_radioactive_man",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1778669728690,
+      "tag": "0007_secret_wallop",
+      "breakpoints": true
     }
   ]
 }

@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm"
-import { users, audits, tools, recommendations } from "./schema"
+import { users, audits, recommendations } from "./schema"
 
 /* User → Audits */
 export const userRelations = relations(users, ({ many }) => ({
@@ -12,16 +12,7 @@ export const auditRelations = relations(audits, ({ one, many }) => ({
     fields: [audits.userId],
     references: [users.id],
   }),
-  tools: many(tools),
   recommendations: many(recommendations),
-}))
-
-/* Tool → Audit */
-export const toolRelations = relations(tools, ({ one }) => ({
-  audit: one(audits, {
-    fields: [tools.auditId],
-    references: [audits.id],
-  }),
 }))
 
 /* Recommendation → Audit */
