@@ -9,7 +9,7 @@ import { ToolForm } from "@/types/audit"
 type ToolCardProps = {
   index: number,
   canDelete: boolean,
-  toolOptions: string[]
+  toolOptions: (category: string) => string[]
   getPlansForTool: (toolName: string) => string[]
   updateTool: (i: number, s: keyof ToolForm, st: string) => void
   tool: ToolForm
@@ -18,8 +18,9 @@ type ToolCardProps = {
   useCaseOptions: string[]
 }
 
-export const ToolCard = React.memo((props: ToolCardProps) => {
+export const ToolCard = React.memo<ToolCardProps>((props) => {
   const { index, canDelete, toolOptions, getPlansForTool, updateTool, tool, setTools, usageLevel, useCaseOptions } = props
+  console.log(tool.useCase)
   return <div className="rounded-lg mt-10 border border-[#e2e8f0] bg-card p-5">
     <div className="mb-4 flex items-center justify-between">
       <h2 className="font-semibold text-secondary">Tool #{index + 1}</h2>
@@ -37,7 +38,7 @@ export const ToolCard = React.memo((props: ToolCardProps) => {
       <Select
         ariaLabel="Tool name options"
         label="Tool name"
-        options={toolOptions}
+        options={toolOptions(tool.useCase)}
         value={tool.toolName}
         setValue={(v) => updateTool(index, "toolName", v)}
       />

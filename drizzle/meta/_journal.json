@@ -43,6 +43,13 @@
       "when": 1778603278913,
       "tag": "0005_clammy_firebird",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1778654274420,
+      "tag": "0006_sparkling_radioactive_man",
+      "breakpoints": true
     }
   ]
 }

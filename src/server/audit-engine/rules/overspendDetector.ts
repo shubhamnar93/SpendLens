@@ -32,11 +32,15 @@ export function detectOverspend(
       };
 
   const recommendations: AuditRecommendation[] = [];
-  if ("monthlyPrice" in currentPlan && input.currentSpend !== undefined) {
+  if (
+    "monthlyPrice" in currentPlan &&
+    input.currentSpend !== undefined &&
+    input.teamSize > 0
+  ) {
     const price = currentPlan?.monthlyPrice;
     const threshold = price * 1.1; // 10% over the listed price is a common threshold for overspend
 
-    if (input.currentSpend/input.teamSize > threshold) {
+    if (input.currentSpend / input.teamSize > threshold) {
       recommendations.push({
         toolName: currentPlan.toolName,
         planName: currentPlan.planName,

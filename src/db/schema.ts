@@ -105,6 +105,10 @@ export const recommendations = pgTable(
     toolName: text("tool_name").notNull(),
     action: text("action").notNull(),
     reason: text("reason").notNull(),
+    inputSavings: real("input_savings"),
+    outputSavings: real("output_savings"),
+    inputPrice: real("input_price"),
+    outputPrice: real("output_price"),
 
     category: text("category").notNull(),
     planName: text("plan_name").notNull(),

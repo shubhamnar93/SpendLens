@@ -1,5 +1,22 @@
-import { AuditRecommendation } from "@/server/audit-engine";
+import { AuditRecommendation, AuditUseCase } from "@/server/audit-engine";
 import React from "react";
+
+
+ type AuditRecommendation = {
+  toolName: string
+  planName: string
+  action: string
+  reason: string
+  currentSpend?: number | undefined
+  inputPrice?: number
+  outputPrice?: number
+  newSpend: number
+  savings?: number
+  inputSavings?: number
+  outputSavings?: number
+  category: AuditUseCase
+  usageBudget: string
+}
 
 export const ToolResultCard = React.memo(({ recommendation, isApi }: { isApi: boolean, recommendation: AuditRecommendation }) => {
   return (
@@ -27,23 +44,22 @@ export const ToolResultCard = React.memo(({ recommendation, isApi }: { isApi: bo
       <div className="mt-4 grid gap-4 md:grid-cols-4">
         <Metric
           label={isApi ? "Current input price" : "Current spend"}
-          value={isApi ? `$${recommendation.InputPrice ?? 0}/M in` : `$${recommendation.currentSpend ?? 0}`}
-          sub={isApi ? `$${recommendation.OutputPrice ?? 0}/M out` : "per month"}
+          value={isApi ? `$${recommendation.inputPrice ?? 0}/M in` : `$${recommendation.currentSpend ?? 0}`}
+          sub={isApi ? `$${recommendation.outputPrice ?? 0}/M out` : "per month"}
+          isApi={isApi}
         />
         <Metric label="Recommended action" value={recommendation.action} highlight />
         <Metric
           label="Spend after"
-          value={`$${recommendation.newSpend}`}
-          sub="per month"
+          value={isApi ? `$${recommendation.inputPrice && recommendation.inputSavings ?(recommendation.inputPrice - recommendation.inputSavings) : 0}/M in` : `$${recommendation.newSpend}`}
+          sub={isApi ? `$${recommendation.outputPrice && recommendation.outputSavings ?(recommendation.outputPrice - recommendation.outputSavings) : 0}/M out` : "per month"}
+          isApi={isApi}
         />
         <Metric
           label="Savings"
-          value={`$${recommendation.savings ?? 0}`}
-          sub={
-            isApi
-              ? `in ${recommendation.inputSavings ?? 0} · out ${recommendation.outputSavings ?? 0}`
-              : "per month"
-          }
+          value={isApi ? `$${recommendation.inputSavings ?? 0}/M in` : `$${recommendation.savings ?? 0}`}
+          sub={isApi ? `$${recommendation.outputSavings}/M out` : "per month"}
+          isApi={isApi}
         />
       </div>
 
@@ -63,11 +79,13 @@ function Metric({
   value,
   sub,
   highlight,
+  isApi = false,
 }: {
   label: string;
   value: string;
   sub?: string;
   highlight?: boolean;
+  isApi?: boolean;
 }) {
   return (
     <div>
@@ -79,7 +97,7 @@ function Metric({
       >
         {value}
       </div>
-      {sub && <div className="text-xs text-[#62748e]">{sub}</div>}
+      {sub && <div className={isApi? "mt-1 text-base font-semibold ": "text-xs text-[#62748e]"}>{sub}</div>}
     </div>
   );
 }

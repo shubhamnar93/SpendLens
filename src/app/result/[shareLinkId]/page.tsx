@@ -31,7 +31,6 @@ export default function ResultPage() {
     loadAudit()
   }, [shareLinkId, trpcClient.audit.getAudit])
 
-  const summary = "Your stack found roughly $75/month ($900/yr) in savings across 1 tool. Biggest win: downgrade pro or consolidate seats on jie — You're paying well above the moderate-usage benchmark for 1 seat(s)."
   const [open, setOpen] = React.useState(false)
   const [intent, setIntent] = React.useState<"consulting" | "report">("consulting")
   const onConsult = () => { setOpen(true); setIntent("consulting"); }
@@ -57,7 +56,7 @@ export default function ResultPage() {
 
       <ResultsSummaryCards resultsLength={data?.recommendations.length} audit={data?.audit} />
 
-      <AISummaryBanner summary={summary} />
+      <AISummaryBanner summary={data?.audit.summary || ""} />
 
       <div className="mt-8 space-y-4">
         {data?.recommendations.map((ra, i) => {
