@@ -18,10 +18,10 @@ export interface NvidiaChatResponse {
 }
 
 const promptInstructions = `You are an AI stack auditor.
-Given the user's current AI stack, their spending data, and a list of recommendations, write a 2-3 sentence summary.
+Given the user's current AI stack, their spending data, and a list of recommendations,write ~100-word personalized summary paragraph.
 
 Rules:
-- 2-3 sentences MAX. No bullet points, no headers, no line breaks.
+- atleast 90 words around 100 words. No bullet points, no headers, no line breaks.
 - Mention the total monthly and annual savings if there are any.
 - If a specific tool is underperforming or overpaid, call it out by name.
 - If a swap or addition is needed, only recommend from the provided list — use the exact tool name.
