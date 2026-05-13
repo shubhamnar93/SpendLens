@@ -1,9 +1,14 @@
+
 ## Summary
 
 SpendLens is an AI stack auditing web app that analyzes a user’s current AI tools, usage, and spending to generate personalized recommendations and cost-saving insights. It automatically calculates value scores, highlights overpriced or redundant tools, and produces a shareable AI-generated audit summary. The product is designed for developers, indie hackers, and small teams who want to optimize their AI tooling and reduce unnecessary monthly costs.
 
 ## Screenshots
-(3 screenshot)
+<img width="1920" height="923" alt="Screenshot 2026-05-13 170014" src="https://github.com/user-attachments/assets/1bb757ab-46b6-429d-ab81-5c69545665e6" />
+<img width="1919" height="923" alt="Screenshot 2026-05-13 170033" src="https://github.com/user-attachments/assets/b572e8e9-8210-4d95-9335-24069ad4d6d8" />
+<img width="1919" height="930" alt="Screenshot 2026-05-13 170108" src="https://github.com/user-attachments/assets/2a43b2ab-4cc5-42e9-a73d-0a06c05982ec" />
+<img width="1913" height="921" alt="Screenshot 2026-05-13 170143" src="https://github.com/user-attachments/assets/87968e45-2390-4071-b340-34b9defab1f5" />
+
 
 ## Getting Started
 
