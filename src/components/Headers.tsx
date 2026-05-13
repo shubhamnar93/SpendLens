@@ -2,9 +2,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+
 
 export const Headers = React.memo(() => {
 
+  const pathname = usePathname();
+  const router = useRouter();
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -27,6 +31,10 @@ export const Headers = React.memo(() => {
     return () => window.removeEventListener("scroll", controlHeader);
   }, [lastScrollY]);
   const scrollToSection = (id: string) => {
+     if (pathname !== "/") {
+      router.push(`/#${id}`);
+      return;
+    }
     const element = document.getElementById(id);
     if (!element) return;
 
