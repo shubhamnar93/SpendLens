@@ -2,11 +2,9 @@ import { baseProcedure, createTRPCRouter } from '../init';
 import { z } from 'zod';
 import { db } from '../../db/index';
 import { users, audits } from '../../db/schema';
-import { runAudit as runAuditEngine } from '../../server/audit-engine/engine';
 import { randomUUID } from 'crypto';
 import { eq } from 'drizzle-orm';
 import { TRPCError } from '@trpc/server';
-import OpenAI from 'openai';
 
 export const userRouter = createTRPCRouter({
   runAudit: baseProcedure
