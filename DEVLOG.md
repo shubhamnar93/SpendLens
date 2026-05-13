@@ -41,3 +41,10 @@
 **What I learned:** Learned how Drizzle ORM works and how to integrate it into the existing stack.
 **Blockers / what I'm stuck on:** The backend is currently failing to accept requests, which is blocking further progress.
 **Plan for tomorrow:** Finish the backend, integrate AI features, and add an email submission flow
+
+## Day 7 — 2026-05-13
+**Hours worked:** 8
+**What I did:** Implemented the AI-generated summary feature, completed the email sending flow using SMTP, and finalized/updated all required documentation. 
+**What I learned:** Learned how SMTP works and how to send transactional emails from the application.
+**Blockers / what I'm stuck on:** No blockers today.
+**Plan for tomorrow:** Wait for feedback and be ready to make improvements.
